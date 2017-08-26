@@ -20,7 +20,6 @@ public class DetectServiceTasks {
     @Autowired
     private RedisService redisService;
 
-    //每3秒执行一次
     @Scheduled(fixedRate = 60000)
     public void timerRate() {
         String url = "https://api.jinjingzheng.zhongchebaolian.com/enterbj/jsp/enterbj/addcartype.jsp";
