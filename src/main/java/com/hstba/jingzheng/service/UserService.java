@@ -38,8 +38,8 @@ public class UserService {
         userMapper.update(user);
     }
 
-    public void setRemind(int remind, String openid) {
-        userMapper.setRemind(remind, openid);
+    public void setRemind(int remind, String openid,String formId) {
+        userMapper.setRemind(remind, openid,formId);
     }
 
     public String login(String code) {

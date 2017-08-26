@@ -23,7 +23,7 @@ public interface UserMapper {
     @Update("UPDATE user SET avatarUrl=#{avatarUrl},city=#{city},country=#{country},gender=#{gender},language=#{language},nickName=#{nickName},province=#{province} WHERE openid =#{openid}")
     void update(User user);
 
-    @Update("UPDATE user SET remind=#{remind} WHERE openid =#{openid}")
-    void setRemind(@Param("remind") int remind, @Param("openid") String openid);
+    @Update({"UPDATE user SET remind=#{remind},formId=#{formId} WHERE openid =#{openid}"})
+    void setRemind(@Param("remind") int remind, @Param("openid") String openid, @Param("formId") String formId);
 
 }

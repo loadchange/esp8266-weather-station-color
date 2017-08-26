@@ -61,12 +61,13 @@ public class IndexController {
 
     @RequestMapping(value = "/switch-remind.json", method = RequestMethod.POST)
     public Map<String, Object> switchRemind(
-            @RequestParam("remind") int remind,
-            @RequestParam("openid") String openid
+            @RequestParam("state") int remind,
+            @RequestParam("openid") String openid,
+            @RequestParam("formId") String formId
     ) {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
-        userService.setRemind(remind, openid);
+        userService.setRemind(remind, openid,formId);
         return result;
     }
 }
