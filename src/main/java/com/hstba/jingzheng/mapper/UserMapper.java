@@ -3,6 +3,8 @@ package com.hstba.jingzheng.mapper;
 import com.hstba.jingzheng.entity.User;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 public interface UserMapper {
 
     @Select("SELECT * FROM user where openid=#{openid}")
@@ -19,6 +21,13 @@ public interface UserMapper {
             @Result(property = "remind", column = "remind"),
     })
     User getUserByOpenId(@Param("openid") String openid);
+
+    @Select("SELECT * FROM users")
+    @Results({
+            @Result(property = "formId",  column = "formId"),
+            @Result(property = "openid", column = "openid")
+    })
+    List<User> getAllRemindUser();
 
     @Update("UPDATE user SET avatarUrl=#{avatarUrl},city=#{city},country=#{country},gender=#{gender},language=#{language},nickName=#{nickName},province=#{province} WHERE openid =#{openid}")
     void update(User user);

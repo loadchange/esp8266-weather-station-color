@@ -11,6 +11,7 @@ public class User {
     private String nickName;
     private String province;
     private int remind;
+    private String formId;
 
     public int getId() {
         return id;
@@ -90,5 +91,13 @@ public class User {
 
     public void setRemind(int remind) {
         this.remind = remind;
+    }
+
+    public String getFormId() {
+        return formId;
+    }
+
+    public void setFormId(String formId) {
+        this.formId = formId;
     }
 }
