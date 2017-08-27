@@ -25,3 +25,5 @@ nbdist/
 .nb-gradle/
 
 application.yml
+*.rdb
+*.log

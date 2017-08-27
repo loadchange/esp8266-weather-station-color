@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Select;
 
 public interface DetectLogMapper {
 
-    @Select("SELECT * FROM detect_log order by time desc limit 1")
+    @Select("SELECT * FROM detect_log where results = 1 order by time desc limit 1")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "time", column = "time"),

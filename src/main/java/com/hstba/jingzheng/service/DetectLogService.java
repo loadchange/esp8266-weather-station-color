@@ -18,4 +18,9 @@ public class DetectLogService {
     public void saveDetectLog(DetectLog log) {
         detectLogMapper.insert(log);
     }
+
+
+    public DetectLog getLastSuccessLog() {
+        return detectLogMapper.getLastSuccessLog();
+    }
 }
