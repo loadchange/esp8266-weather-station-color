@@ -38,8 +38,8 @@ public class UserService {
         userMapper.update(user);
     }
 
-    public void setRemind(int remind, String openid,String formId) {
-        userMapper.setRemind(remind, openid,formId);
+    public void setRemind(int remind, String openid, String formId) {
+        userMapper.setRemind(remind, openid, formId);
     }
 
     public String login(String code) {
@@ -48,7 +48,12 @@ public class UserService {
         if (entity.getStatusCodeValue() == 200) {
             String body = entity.getBody();
             Map<String, Object> res = JSONUtil.toMap(body);
-            return String.valueOf(res.get("openid"));
+            String openid = String.valueOf(res.get("openid"));
+            User user = userMapper.getUserByOpenId(openid);
+            if (user == null) {
+                userMapper.insert(openid);
+            }
+            return openid;
         }
         return "";
     }

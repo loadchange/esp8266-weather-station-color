@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableScheduling
 @MapperScan("com.hstba.jingzheng.mapper")
-public class SpringbootRestTemplateApplication {
+public class Application {
     @Autowired
     private RestTemplateBuilder builder;
 
@@ -23,6 +23,6 @@ public class SpringbootRestTemplateApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringbootRestTemplateApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }

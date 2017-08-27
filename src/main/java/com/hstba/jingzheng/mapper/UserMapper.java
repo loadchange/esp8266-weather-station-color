@@ -22,12 +22,15 @@ public interface UserMapper {
     })
     User getUserByOpenId(@Param("openid") String openid);
 
-    @Select("SELECT * FROM users")
+    @Select("SELECT * FROM user")
     @Results({
             @Result(property = "formId",  column = "formId"),
             @Result(property = "openid", column = "openid")
     })
     List<User> getAllRemindUser();
+
+    @Insert({"INSERT INTO user(openid,remind) VALUES(#{openid}, 1)"})
+    void insert(@Param("openid") String openid);
 
     @Update("UPDATE user SET avatarUrl=#{avatarUrl},city=#{city},country=#{country},gender=#{gender},language=#{language},nickName=#{nickName},province=#{province} WHERE openid =#{openid}")
     void update(User user);
