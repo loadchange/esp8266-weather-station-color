@@ -29,7 +29,7 @@ public class IndexController {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
         int currentState = redisService.get("currentState") != null ? Integer.valueOf(redisService.get("currentState")) : 0;
-        result.put("currentState", currentState);
+        result.put("currentstate", currentState);
         long lastOpenTime = new Date().getTime() - (4 * 60 * 60 * 1000);
         if (redisService.get("lastOpenTime") != null) {
             lastOpenTime = Long.valueOf(redisService.get("lastOpenTime"));

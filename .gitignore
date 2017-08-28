@@ -27,3 +27,4 @@ nbdist/
 application.yml
 *.rdb
 *.log
+deploy.sh

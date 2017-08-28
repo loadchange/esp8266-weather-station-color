@@ -1,5 +1,6 @@
 package com.hstba.jingzheng;
 
+import com.hstba.jingzheng.service.RedisService;
 import com.hstba.jingzheng.service.WechatApiService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class JingzhengApplicationTests {
     @Autowired
     private WechatApiService wechatApiService;
+    @Autowired
+    private RedisService redisService;
 
     @Test
     public void contextLoads() {
