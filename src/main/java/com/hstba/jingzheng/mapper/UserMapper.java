@@ -29,7 +29,7 @@ public interface UserMapper {
     })
     List<User> getAllRemindUser();
 
-    @Insert({"INSERT INTO user(openid,remind) VALUES(#{openid}, 1)"})
+    @Insert({"INSERT INTO user(openid,remind) VALUES(#{openid}, 0)"})
     void insert(@Param("openid") String openid);
 
     @Update("UPDATE user SET avatarUrl=#{avatarUrl},city=#{city},country=#{country},gender=#{gender},language=#{language},nickName=#{nickName},province=#{province} WHERE openid =#{openid}")
