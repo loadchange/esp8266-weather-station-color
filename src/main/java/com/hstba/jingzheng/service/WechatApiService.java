@@ -42,7 +42,7 @@ public class WechatApiService {
             String body = entity.getBody();
             Map<String, Object> res = JSONUtil.toMap(body);
             String access_token = String.valueOf(res.get("access_token"));
-            int expires_in = Integer.valueOf(String.valueOf(res.get("expires_in")));
+            int expires_in = Float.valueOf(String.valueOf(res.get("expires_in"))).intValue();
             long token_aging = currentTime + ((expires_in - 200) * 1000);
             redisService.set("access_token", access_token);
             redisService.set("token_aging", token_aging + "");

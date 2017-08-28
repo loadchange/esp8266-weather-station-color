@@ -15,8 +15,7 @@ public class JingzhengApplicationTests {
 
     @Test
     public void contextLoads() {
-        String tonken = wechatApiService.getAccessToken();
-        System.out.println(tonken);
+//        String tonken = wechatApiService.getAccessToken();
 //        wechatApiService.senTplMsg(tonken, "okwgf0Xd79QuZ-31WcsLOLTeJMqM", "0c8ce811d7ebd7478b3c4fe693a18203");
     }
 
