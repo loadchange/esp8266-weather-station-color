@@ -31,10 +31,10 @@ public class WechatApiService {
 
     public String getAccessToken() {
         long currentTime = new Date().getTime();
-        if (redisService.get("access_token") != null && redisService.get("token_aging") != null) {
-            if (currentTime < Long.valueOf(redisService.get("token_aging"))) {
-                return redisService.get("access_token");
-            }
+        String cacheAccessToken = redisService.get("access_token");
+        String cacheTokenAging = redisService.get("token_aging");
+        if (cacheAccessToken != null && cacheTokenAging != null && Long.valueOf(cacheTokenAging) > currentTime) {
+            return cacheAccessToken;
         }
         String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appid + "&secret=" + secret;
         ResponseEntity<String> entity = this.restTemplate.getForEntity(url, String.class);
