@@ -50,7 +50,7 @@ public class DetectServiceTasks {
                 List<User> users = userMapper.getAllRemindUser();
                 users.forEach(u -> {
                     userMapper.setRemind(0, u.getOpenid(), "");
-                    String token = wechatApiService.getAccessToken();
+                    String token = wechatApiService.getAccessToken(false);
                     wechatApiService.senTplMsg(token, u.getOpenid(), u.getFormId());
                 });
             }

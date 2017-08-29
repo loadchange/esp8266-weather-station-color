@@ -14,6 +14,8 @@ import java.util.Map;
 
 @Service
 public class WechatApiService {
+    private static final int ERROR_OK = 0;
+    private static final int INVALID_ACCESS_TOKEN = 4001;
     @Autowired
     private RedisService redisService;
 
@@ -29,11 +31,11 @@ public class WechatApiService {
     @Value("${tplid}")
     private String tplid;
 
-    public String getAccessToken() {
+    public String getAccessToken(boolean forced) {
         long currentTime = new Date().getTime();
         String cacheAccessToken = redisService.get("access_token");
         String cacheTokenAging = redisService.get("token_aging");
-        if (cacheAccessToken != null && cacheTokenAging != null && Long.valueOf(cacheTokenAging) > currentTime) {
+        if (!forced && cacheAccessToken != null && cacheTokenAging != null && Long.valueOf(cacheTokenAging) > currentTime) {
             return cacheAccessToken;
         }
         String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appid + "&secret=" + secret;
@@ -56,7 +58,7 @@ public class WechatApiService {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("touser", openid);
         map.put("template_id", tplid);
-        map.put("page", "index");
+        map.put("page", "pages/index/index");
         map.put("form_id", form_id);
         Map<String, Object> data = new HashMap<String, Object>();
         Map<String, Object> keyword1 = new HashMap<String, Object>();
@@ -65,15 +67,16 @@ public class WechatApiService {
         keyword1.put("value", dateFormater.format(date));
         keyword1.put("color", "#173177");
         Map<String, Object> keyword2 = new HashMap<String, Object>();
-        keyword2.put("value", "进京证在线申请系统已可用");
+        keyword2.put("value", "请尽快打开北京交警APP办理进京证");
         keyword2.put("color", "#173177");
         Map<String, Object> keyword3 = new HashMap<String, Object>();
-        keyword3.put("value", "请您尽快登录北京交警App申请进京证");
-        keyword3.put("color", "#173177");
+        keyword3.put("value", "进京证已开启");
+        keyword3.put("color", "#e62117");
         data.put("keyword1", keyword1);
         data.put("keyword2", keyword2);
         data.put("keyword3", keyword3);
         map.put("data", data);
+        map.put("emphasis_keyword", "keyword3.DATA");
 
 
         HttpHeaders headers = new HttpHeaders();
@@ -81,6 +84,10 @@ public class WechatApiService {
         HttpEntity<Map<String, Object>> entity = new HttpEntity<Map<String, Object>>(map, headers);
 
         ResponseEntity<String> response = this.restTemplate.postForEntity(url, entity, String.class, map);
-        System.out.println(response.getBody());
+        Map<String, Object> res = JSONUtil.toMap(response.getBody());
+        int errcode = Float.valueOf(String.valueOf(res.get("errcode"))).intValue();
+        if (errcode == INVALID_ACCESS_TOKEN) {
+            senTplMsg(getAccessToken(true), openid, form_id);
+        }
     }
 }

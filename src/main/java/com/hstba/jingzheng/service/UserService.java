@@ -35,6 +35,9 @@ public class UserService {
     }
 
     public void updateUser(User user) {
+        if (user.getOpenid() == null) {
+            return;
+        }
         userMapper.update(user);
     }
 

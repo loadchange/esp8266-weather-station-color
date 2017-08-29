@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
+@Mapper
 public interface UserMapper {
 
     @Select("SELECT * FROM user where openid=#{openid}")
@@ -22,7 +23,7 @@ public interface UserMapper {
     })
     User getUserByOpenId(@Param("openid") String openid);
 
-    @Select("SELECT * FROM user")
+    @Select("SELECT * FROM user where remind = 1")
     @Results({
             @Result(property = "formId",  column = "formId"),
             @Result(property = "openid", column = "openid")
@@ -35,7 +36,7 @@ public interface UserMapper {
     @Update("UPDATE user SET avatarUrl=#{avatarUrl},city=#{city},country=#{country},gender=#{gender},language=#{language},nickName=#{nickName},province=#{province} WHERE openid =#{openid}")
     void update(User user);
 
-    @Update({"UPDATE user SET remind=#{remind},formId=#{formId} WHERE openid =#{openid}"})
+    @Update({"UPDATE user SET remind=#{remind},formId=#{formId} WHERE openid=#{openid}"})
     void setRemind(@Param("remind") int remind, @Param("openid") String openid, @Param("formId") String formId);
 
 }

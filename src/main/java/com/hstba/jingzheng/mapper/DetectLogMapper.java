@@ -1,11 +1,9 @@
 package com.hstba.jingzheng.mapper;
 
 import com.hstba.jingzheng.entity.DetectLog;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
+@Mapper
 public interface DetectLogMapper {
 
     @Select("SELECT * FROM detect_log where results = 1 order by time desc limit 1")
