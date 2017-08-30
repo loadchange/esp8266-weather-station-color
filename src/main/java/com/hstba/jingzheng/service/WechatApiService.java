@@ -84,6 +84,7 @@ public class WechatApiService {
         HttpEntity<Map<String, Object>> entity = new HttpEntity<Map<String, Object>>(map, headers);
 
         ResponseEntity<String> response = this.restTemplate.postForEntity(url, entity, String.class, map);
+        System.out.println(response.getBody() + '|' + openid);
         Map<String, Object> res = JSONUtil.toMap(response.getBody());
         int errcode = Float.valueOf(String.valueOf(res.get("errcode"))).intValue();
         if (errcode == INVALID_ACCESS_TOKEN) {

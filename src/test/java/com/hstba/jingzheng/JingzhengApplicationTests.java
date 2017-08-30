@@ -4,6 +4,7 @@ import com.hstba.jingzheng.entity.User;
 import com.hstba.jingzheng.mapper.UserMapper;
 import com.hstba.jingzheng.service.RedisService;
 import com.hstba.jingzheng.service.WechatApiService;
+import com.hstba.jingzheng.util.StringUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,6 @@ public class JingzhengApplicationTests {
     @Test
     public void contextLoads() {
 //        String tonken = wechatApiService.getAccessToken(false);
-//        wechatApiService.senTplMsg(tonken, "okwgf0Xd79QuZ-31WcsLOLTeJMqM", "aa23b3c6c823a391a12fd20391075c0d");
+//        wechatApiService.senTplMsg(tonken, "okwgf0RC4g_WbN3oWSsrs8QolGgc", "47fa58e6a4d640484d41b7c4273aebf6");
     }
-
 }

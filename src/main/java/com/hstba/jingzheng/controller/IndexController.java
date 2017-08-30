@@ -5,6 +5,7 @@ import com.hstba.jingzheng.entity.User;
 import com.hstba.jingzheng.service.DetectLogService;
 import com.hstba.jingzheng.service.RedisService;
 import com.hstba.jingzheng.service.UserService;
+import com.hstba.jingzheng.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,6 +57,7 @@ public class IndexController {
 
     @RequestMapping(value = "/sync-user-info.json", method = RequestMethod.POST)
     public Map<String, Object> syncUserInfo(@RequestBody User user) {
+        user.setNickName(StringUtil.filterEmoji(user.getNickName()));
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("success", true);
         userService.updateUser(user);
